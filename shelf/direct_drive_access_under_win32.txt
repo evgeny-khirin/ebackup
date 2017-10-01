@@ -1,0 +1,35 @@
+Direct Drive Access Under Win32
+================================
+To open a physical hard drive for direct disk access (raw I/O) in a Win32-based
+application, use a device name of the form 
+	\\.\PhysicalDriveN 
+	where N is 0, 1, 2, and so forth, representing each of the physical drives in
+	the system. 
+
+To open a logical drive, direct access is of the form 
+	\\.\X: 
+	where X: is a hard-drive partition letter, floppy disk drive, or CD-ROM drive.
+
+You can open a physical or logical drive using the CreateFile() application 
+programming interface (API) with these device names provided that you have the 
+appropriate access rights to the drive (that is, you must be an administrator). 
+You must use both the CreateFile() FILE_SHARE_READ and FILE_SHARE_WRITE flags 
+to gain access to the drive. 
+
+Once the logical or physical drive has been opened, you can then perform direct 
+I/O to the data on the entire drive. When performing direct disk I/O, you must 
+seek, read, and write in multiples of sector sizes of the device and on sector 
+boundaries. Call DeviceIoControl() using IOCTL_DISK_GET_DRIVE_GEOMETRY to get 
+the bytes per sector, number of sectors, sectors per track, and so forth, so 
+that you can compute the size of the buffer that you will need. 
+
+Note that a Win32-based application cannot open a file by using internal 
+Windows NT object names; for example, attempting to open a CD-ROM drive by 
+opening 
+	\Device\CdRom0 
+does not work because this is not a valid Win32 device name. An application can 
+use the QueryDosDevice() API to get a list of all valid Win32 device names and 
+see the mapping between a particular Win32 device name and an internal Windows 
+NT object name. An application running at a sufficient privilege level can 
+define, redefine, or delete Win32 device mappings by calling the 
+DefineDosDevice() API.

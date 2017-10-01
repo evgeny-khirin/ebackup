@@ -1,0 +1,103 @@
+#!/bin/sh
+
+start()
+{
+	echo Starting firewall
+
+	#########################################################################
+	# Flush all predefined rulles and chains
+	#########################################################################
+	iptables -F
+	iptables -t nat -F
+	iptables -t mangle -F
+
+	#########################################################################
+	# Delete all user-defined rulles and chains
+	#########################################################################
+ 	iptables -X
+	iptables -t nat -X
+	iptables -t mangle -X
+
+	#########################################################################
+	# Set default policy of filter table to DROP
+	#########################################################################
+ 	iptables -P INPUT DROP
+ 	iptables -P OUTPUT DROP
+ 	iptables -P FORWARD DROP
+
+	#########################################################################
+	# Drop all fragments
+	#########################################################################
+	iptables -A INPUT -f -j DROP
+	iptables -A OUTPUT -f -j DROP
+
+	#########################################################################
+	# Use connection state to bypass the rules
+	#########################################################################
+	iptables -A OUTPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+	iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+	#########################################################################
+	# Allow outgoing internet and LAN traffic from firewall machine.
+	#########################################################################
+	iptables -A OUTPUT -j ACCEPT
+
+	#########################################################################
+	# Enable loopback interface
+	#########################################################################
+	iptables -A INPUT -s 127.0.0.0/8 -d 127.0.0.0/8 -j ACCEPT
+
+	#########################################################################
+	# Allow icmp echo requests.
+	#########################################################################
+	iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+	#########################################################################
+	# Allow SSH access.
+	#########################################################################
+	iptables -A INPUT -p tcp --destination-port ssh -j ACCEPT
+
+	#########################################################################
+	# Redirect port 80 to localhost:8080
+	#########################################################################
+	iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080
+	iptables -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-ports 8080
+	iptables -A INPUT -p tcp --destination-port 8080 -j ACCEPT
+
+	#########################################################################
+	# Redirect port 443 to localhost:8443
+	#########################################################################
+	iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8443
+	iptables -t nat -A OUTPUT -o lo -p tcp --dport 443 -j REDIRECT --to-ports 8443
+	iptables -A INPUT -p tcp --destination-port 8443 -j ACCEPT
+
+	return 0
+}
+
+case "$1" in
+	start)
+		start
+		;;
+
+	stop)
+		start
+		;;
+
+	restart)
+		# "restart" is really just "start" as this isn't a daemon,
+		# and "start" clears any pre-defined rules anyway.
+		# This is really only here to make those who expect it happy
+		start
+		;;
+
+	panic)
+		start
+		;;
+
+	*)
+		echo "Usage: $0 {start|stop|restart|wait_inet|panic}"
+		exit 1
+esac
+
+exit 0
+

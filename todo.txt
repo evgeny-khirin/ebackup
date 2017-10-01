@@ -1,0 +1,16 @@
+1. Move SPC from https to sockets with RSA + AES encryption.
+	Key exchange algorithm:
+	1. Client asks server for public key.
+	2. Server responds with public key. The key is signed by
+	   server with EB_CMN_DSS_PRIVATE_KEY.
+	3. In order to make data of first requests random, they are encrypted with
+	   some hardcoded key using eklib:aes_128_encrypt.
+	4. Client verifies public key with EB_CMN_DSS_PUBLIC_KEY.
+	5. Client generates its session key, encrypts it with public key and
+	   sends to server.
+	6. Server generates its session key, encrypts it with client's session key and
+	   sends it to client.
+	7. Now client and server exchanged the keys.
+
+2. Update laptop support from http://www3.sympatico.ca/cautiontape//vostro/.
+

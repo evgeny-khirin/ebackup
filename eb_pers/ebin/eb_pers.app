@@ -1,0 +1,21 @@
+{application, eb_pers,
+ [{description, "Erlios Backup"},
+  {vsn, "2.5.2"},
+  {modules, [eb_pers,
+						 eb_pers_bckp,
+						 eb_pers_conf,
+						 eb_pers_cron,
+						 eb_pers_inets,
+						 eb_pers_sup,
+						 eb_pers_ui
+						]},
+  {registered,[eb_pers_sup,
+							 eb_pers_conf,
+							 eb_pers_inets,
+							 eb_pers_cron,
+							 eb_pers_bckp,
+							 eb_pers_bckp_db_cleaner
+							]},
+  {applications, [kernel, stdlib, eklib, kdb]},
+	{mod, {eb_pers, []}},
+  {env, []}]}.

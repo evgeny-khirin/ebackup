@@ -1,0 +1,37 @@
+Fault tolerant system for management of semi-structured data.
+-------------------------------------------------------------
+
+Storage:
+* True 64-bits storage manager handles 16 exbibytes of storage without
+  loss of performance.
+* Storage supported - OS files, raw disks, raid arrays, pool of disks, pool
+  of computers, pools with software raid, cloud storage, whatever else...
+* Hot storage adding in running system without restart. Added storage will be
+  available for application immediately without delay.
+* Custom client API to storage manager.
+
+Database:
+* Number of tables in database is limited by available storage only.
+* Size of single database table is limited by available storage only.
+* Database table is B-tree with variable records length. Record consists of
+  key-value tuple. Max record size is about 2G. Real max size may be
+  limited by memory, available for application. There is no restrictions
+  on size of key or value within each record and within table. It is
+  possible to mix records of different sizes in same table.
+* There is no restrictions on type of keys and values stored in database.
+  It is possible to mix keys and values of different types in same table.
+* Page size is any in range from 75 bytes up to 4GB. Real max size may be
+  limited by memory, available for application.
+* Built-in data compression.
+* Custom client API to database.
+
+Transactions support:
+* Full ACID.
+* Transactions isolation level - serial. Support of isolation levels is
+  extendable.
+* Transactions durability support - survives system crashes, power failures
+  and media crashes. In case of media crash, restore is possible from complete
+  log or from partial log + replica.
+* Custom transaction log management.
+* X/Open distributed transaction processing interface can be provided.
+* Custom client API to transaction manager.

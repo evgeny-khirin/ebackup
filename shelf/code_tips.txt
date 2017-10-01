@@ -1,0 +1,10 @@
+Short code tips.
+
+%%---------------------------------------------------------------------------
+%% Check that e-mail is valid address
+%%---------------------------------------------------------------------------
+EmailCheck = fun(Args, Field2) ->
+  {ok, Email} = yaws_api:postvar(Args, Field2),
+  Match = regexp:match(Email, "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+"),
+  Match /= nomatch
+end.

@@ -1,0 +1,10 @@
+*.beam
+*.d
+erlios/priv/www/logs/*
+erlios/priv/db
+kdb/c_src/obj.linux
+kdb/c_src/tests.linux
+kdb/priv/*
+*.pdb
+releases/priv/*
+erlios/priv/www/htdocs/download/*

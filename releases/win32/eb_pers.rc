@@ -1,0 +1,3 @@
+#include "eb_pers.hpp"
+
+EB_PERS_ICON_ID ICON "erlios.ico"

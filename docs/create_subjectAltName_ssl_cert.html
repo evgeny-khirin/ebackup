@@ -1,0 +1,984 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+            <title>Tutorial - Create subjectAltName SSL Cert for Apache 2.2 - IST - Application Services - UCB Confluence</title>
+    
+        
+
+                        
+    
+
+            
+<meta id="confluence-context-path" name="confluence-context-path" content="">
+<meta id="atlassian-token" name="atlassian-token" content="Si8mYNsyO8">
+<meta id="confluence-space-key" name="confluence-space-key" content="istas">
+
+<script type="text/javascript">
+    // Deprecated global variables. To be removed in a future version of Confluence.
+    var contextPath = '';
+</script>
+
+    
+
+<!-- include system css resources -->
+<link type="text/css" rel="stylesheet" href="/s/1722/1/1/_/download/superbatch/css/batch.css" media="all">
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" href="/s/1722/1/1/_/download/superbatch/css/batch.css?ieonly=true" media="all">
+<![endif]-->
+<link type="text/css" rel="stylesheet" href="/s/1722/1/1/_/download/superbatch/css/batch.css?media=print" media="print">
+<link type="text/css" rel="stylesheet" href="/s/1722/1/1.0.3/_/download/batch/com.atlassian.confluence.plugins.drag-and-drop:support/com.atlassian.confluence.plugins.drag-and-drop:support.css" media="all">
+<link type="text/css" rel="stylesheet" href="/s/1722/1/1.6.8/_/download/batch/confluence.macros.advanced:fancy-box/confluence.macros.advanced:fancy-box.css" media="all">
+<link type="text/css" rel="stylesheet" href="/s/1722/1/1.0/_/download/batch/confluence.web.resources:labels-editor/confluence.web.resources:labels-editor.css" media="all">
+
+<!-- end system css resources -->
+
+    <link rel="stylesheet" href="/s/1722/1/50/_/styles/combined.css?spaceKey=istas" type="text/css">
+
+    <meta name="confluence-request-time" content="1278244911213">
+
+<meta name="loggedInUsername" content="">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/s/1722/1/_/images/logo/confluence_16.png">
+
+<link rel="search" type="application/opensearchdescription+xml" href="/opensearch/osd.action" title="UCB Confluence"/>
+
+        <!-- include system javascript resources -->
+                        
+    
+    <script type="text/javascript" src="/s/1722/1/1/_/download/superbatch/js/batch.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.13.1/_/download/batch/com.atlassian.confluence.plugins.pagetree:pagetree-resources/com.atlassian.confluence.plugins.pagetree:pagetree-resources.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0.3/_/download/batch/com.atlassian.confluence.plugins.drag-and-drop:support/com.atlassian.confluence.plugins.drag-and-drop:support.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0.3/_/download/batch/com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-for-view-content/com.atlassian.confluence.plugins.drag-and-drop:drag-and-drop-for-view-content.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.6.8/_/download/batch/confluence.macros.advanced:fancy-box/confluence.macros.advanced:fancy-box.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.6.8/_/download/batch/confluence.macros.advanced:thumbnail-images/confluence.macros.advanced:thumbnail-images.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0/_/download/resources/confluence.web.resources:dwr/engine.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0/_/download/resources/confluence.web.resources:dwr/util.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0/_/download/resources/confluence.web.resources:labels-editor/AddLabeltoEntity.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0/_/download/resources/confluence.web.resources:labels-editor/RemoveLabelFromEntity.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0/_/download/resources/confluence.web.resources:labels-editor/SuggestedLabelsForEntity.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0/_/download/batch/confluence.web.resources:labels-editor/confluence.web.resources:labels-editor.js" ></script>
+<script type="text/javascript" src="/s/1722/1/1.0.4/_/download/batch/com.atlassian.confluence.plugins.doctheme:splitter/com.atlassian.confluence.plugins.doctheme:splitter.js" ></script>
+
+    <!-- end system javascript resources -->
+
+    
+
+    
+    <meta name="wikilink" content="[istas:Tutorial - Create subjectAltName SSL Cert for Apache 2.2]">
+
+</head>
+
+<body             onload="placeFocus()"
+     id="com-atlassian-confluence" class="">
+<div id="full-height-container">
+
+
+
+<fieldset class="hidden parameters">
+    <input type="hidden" id="statusDialogHeading" value="What are you working on?">
+    <input type="hidden" id="statusDialogLatestLabel" value="Last update:">
+    <input type="hidden" id="statusDialogUpdateButtonLabel" value="Update">
+    <input type="hidden" id="statusDialogCancelButtonLabel" value="Cancel">
+</fieldset>
+
+<fieldset class="hidden parameters">
+    <input type="hidden" id="globalSettingsAttachmentMaxSize" value="10485760">
+    <input type="hidden" id="userLocale" value="en_GB">
+</fieldset>
+
+    
+<div id="header" class="sectionbottom ">
+        <form id="quick-search" class="quick-search" method="get" action="/dosearchsite.action">
+        <fieldset>
+            <legend>Quick Search</legend>
+            <input class="quick-search-query" id="quick-search-query" type="text" accessKey="q" autocomplete="off" name="queryString" size="25" />
+            <input class="quick-search-submit" id="quick-search-submit" type="submit" value="Search" />
+            <div class="aui-dd-parent quick-nav-drop-down"><!-- Quick nav appears here --></div>
+        </fieldset>
+        <fieldset class="hidden parameters">
+            <input type="hidden" id="quickNavEnabled" value="true" />
+                    </fieldset>
+    </form>
+    <ul id="header-menu-bar" class="ajs-menu-bar">
+                    
+        
+            <li class="normal ajs-menu-item">
+        <a id="browse-menu-link" class="browse trigger ajs-menu-title" href="#"><span><span>Browse</span></span></a>         <div class="hidden ajs-drop-down">
+                        <ul  id="browse-menu-link-leading"                 class="section-leading first">
+                                        <li>
+    
+        
+    
+    <a  id="space-pages-link" href="/pages/listpages.action?key=istas"  class=""   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Pages</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-blogposts-link" href="/pages/viewrecentblogposts.action?key=istas"  class=""   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Blog</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-labels-link" href="/labels/listlabels-heatmap.action?key=istas"  class=""   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Labels</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-attachments-link" href="/spaces/listattachmentsforspace.action?key=istas"  class=""   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Attachments</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  href="/spaces/space-bookmarks.action?spaceKey=istas"  class=""   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Bookmarks</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-mail-link" href="/spaces/viewmailarchive.action?key=istas"  class=""   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Mail</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="space-advanced-link" href="/spaces/viewspacesummary.action?key=istas"  class=""   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Advanced</span></a>        </li>
+                            </ul>
+                        <ul  id="browse-menu-link-global"                 class="section-global">
+                                        <li>
+    
+            
+    
+    <a  id="gadget-directory-link" href="#"  class="user-item administration-link"   title="Browse gadgets provided by Confluence">
+                   <span>Confluence Gadgets</span></a>        </li>
+                            </ul>
+                    </div>
+    </li>
+        
+                                                         <li class="ajs-menu-item normal">
+        
+        
+    
+    <a  id="login-link" href="/login.action?os_destination=%2Fdisplay%2Fistas%2FTutorial%2B-%2BCreate%2BsubjectAltName%2BSSL%2BCert%2Bfor%2BApache%2B2.2"  class="user-item login-link"  >
+                   <span>Log In</span></a>        </li>
+                                <li class="normal ajs-menu-item">
+            <div id="splitter-button" class="hidden" title="Sidebar"></div>
+        </li>
+
+    </ul>
+    
+    
+    <ol id="breadcrumbs">
+                    
+        <li class="first" >
+                                    <span><a href="/dashboard.action">Dashboard</a></span>
+                </li>
+                    
+        <li>
+                                    <span><a href="/display/istas">IST - Application Services</a></span>
+                </li>
+                                        <li id="ellipsis" title="    &#8230;
+                    Home
+             &gt;         Architecture
+        &#8230;
+"><span><strong>&#8230;</strong></span></li>
+                                    
+        <li class="hidden-crumb" >
+                                    <span><a href="/display/istas/Home">Home</a></span>
+                </li>
+                                
+        <li class="hidden-crumb" >
+                                    <span><a href="/display/istas/Architecture">Architecture</a></span>
+                </li>
+                    
+        <li>
+                                    <span><a href="/display/istas/Tutorials">Tutorials</a></span>
+                </li>
+                    
+        <li>
+                                    <span>Tutorial - Create subjectAltName SSL Cert for Apache 2.2</span>
+                </li>
+        </ol>
+
+</div>
+
+    <div id="splitter">
+    <div id="splitter-sidebar">
+
+        
+
+                    
+    
+    
+
+<div class="plugin_pagetree">
+
+                <div id="pagetreesearch">
+            <form method="POST" action="/plugins/pagetreesearch/pagetreesearch.action" name="pagetreesearchform">
+                                    <input type="hidden" name="ancestorId" value="1409036">
+                                <input type="hidden" name="spaceKey" value="istas">
+                <input type="text"  size="20" name="queryString"/>
+                <input type="submit" value="Search"/>
+            </form>
+        </div>
+    
+        
+    <ul style="list-style-type: none; margin-left: 0; padding-left: 0">
+        <div class="plugin_pagetree_children">
+        </div>
+    </ul>
+
+    <fieldset class="hidden">
+        <input type="hidden" name="treeId" value=""/>
+        <input type="hidden" name="treeRequestId" value="/plugins/pagetree/naturalchildren.action?decorator=none&amp;excerpt=false&amp;sort=position&amp;reverse=false&amp;disableLinks=false" />
+        <input type="hidden" name="treePageId" value="28574612" />
+
+        <input type="hidden" name="noRoot" value="false"/>
+        <input type="hidden" name="rootPageId" value="1409036"/>
+
+        <input type="hidden" name="rootPage" value=""/>
+        <input type="hidden" name="startDepth" value="0" />
+        <input type="hidden" name="spaceKey" value="istas" />
+
+        <input type="hidden" name="i18n-pagetree.loading" value="Loading..."/>
+        <input type="hidden" name="loginUrl" value="/login.action?os_destination=%2Fdisplay%2Fistas%2FTutorial%2B-%2BCreate%2BsubjectAltName%2BSSL%2BCert%2Bfor%2BApache%2B2.2"/>
+
+                <fieldset class="hidden">
+                                                <input type="hidden" name="ancestorId" value="1409053" />
+                                    <input type="hidden" name="ancestorId" value="1409031" />
+                                    <input type="hidden" name="ancestorId" value="1409036" />
+                                    </fieldset>
+    </fieldset>
+</div>
+
+
+
+            </div>
+    <div id="splitter-content">
+
+                    <script type="text/javascript" src="/s/1722/1/2/_/download/resources/com.atlassian.confluence.plugins.doctheme:resources/doc-theme.js"></script>
+    
+            
+    
+<div id="main"  >
+    
+    
+    <div id="navigation" class="content-navigation view">
+        <fieldset class="hidden parameters">
+            <input type="hidden" id="pageId" value="28574612">
+        </fieldset>
+        <ul class="ajs-menu-bar">
+                                
+            <li class="normal ajs-menu-item">
+        <a id="add-menu-link" class="add trigger ajs-menu-title" href="#"><span><span>Add</span></span></a>         <div class="hidden ajs-drop-down">
+                        <ul  id="add-menu-link-page"                 class="section-page first">
+                                        <li>
+    
+        
+    
+    <a  id="add-comment-menu-link" href="/display/istas/Tutorial+-+Create+subjectAltName+SSL+Cert+for+Apache+2.2?showComments=true&showCommentArea=true#addcomment"  class="add-comment"  >
+                   <span>Comment</span></a>        </li>
+                            </ul>
+                    </div>
+    </li>
+                    
+            <li class="normal ajs-menu-item">
+        <a id="action-menu-link" class="action trigger ajs-menu-title" href="#"><span><span>Tools</span></span></a>         <div class="hidden ajs-drop-down">
+                        <ul  id="action-menu-link-primary"                 class="section-primary first">
+                                        <li>
+    
+        
+    
+    <a  id="view-attachments-link" href="/pages/viewpageattachments.action?pageId=28574612"  class="action-view-attachments"  accessKey="a" >
+                   <span><u>A</u>ttachments (0)</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="action-view-history-link" href="/pages/viewpreviousversions.action?pageId=28574612"  class="action-view-history"  >
+                   <span>Page History</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="action-page-permissions-link" href="/pages/viewinfo.action?pageId=28574612"  class="action-page-permissions"  >
+                   <span>Restrictions</span></a>        </li>
+                            </ul>
+                        <ul  id="action-menu-link-secondary"                 class="section-secondary">
+                                        <li>
+    
+        
+    
+    <a  id="view-page-info-link" href="/pages/viewinfo.action?pageId=28574612"  class="action-view-info"  accessKey="i" >
+                   <span><u>I</u>nfo</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="link-to-page-link" href="/pages/viewinfo.action?pageId=28574612"  class=""  >
+                   <span>Link to this Page&hellip;</span></a>        </li>
+                                        <li>
+    
+        
+    
+    <a  id="action-view-source-link" href="/pages/viewpagesrc.action?pageId=28574612"  class="action-view-source popup-link"  >
+                   <span>View Wiki Markup</span></a>        </li>
+                            </ul>
+                    </div>
+    </li>
+            </ul>
+    </div>
+
+    
+    <h1 id="title-heading" class="pagetitle">
+                    <a href="/display/istas"><img class="logo global" src="/images/logo/confluence_48_white.png" alt=""></a>        
+		<span id="title-text">
+					            <a href="/display/istas/Tutorial+-+Create+subjectAltName+SSL+Cert+for+Apache+2.2">Tutorial - Create subjectAltName SSL Cert for Apache 2.2</a>
+    				</span>
+    </h1>
+
+    
+
+    
+    
+
+    <div id="content" class="page view">
+        
+
+
+<fieldset id="link-to-page-fields" class="hidden parameters">
+    <input type="hidden" id="linkToThisPageHeading" value="Link to this Page">
+    <input type="hidden" id="linkToThisPageLink" value="Link">
+    <input type="hidden" id="linkToThisPageTinyLink" value="Tiny Link">
+    <input type="hidden" id="linkToThisPageWikiMarkup" value="Wiki Markup">
+    <input type="hidden" id="linkToThisPageClose" value="Close">
+</fieldset>
+    <fieldset class="hidden parameters">
+    <input type="hidden" title="movePageDialogViewPageTitle" value="Move Page &ndash; &#8216;Tutorial - Create subjectAltName SSL Cert for Apache 2.2&#8217;">
+    <input type="hidden" title="movePageDialogEditPageTitle" value="Set Page Location">
+    <input type="hidden" title="movePageDialogMoveButton" value="Move">
+    <input type="hidden" title="movePageDialogOkButton" value="OK">
+    <input type="hidden" title="movePageDialogCancelButton" value="Cancel">
+    <input type="hidden" title="movePageDialogBrowsePanelTip" value="Click to select the new parent page for this page and its children.">
+    <input type="hidden" title="movePageDialogSearchPanel" value="Search">
+    <input type="hidden" title="movePageDialogHistoryPanel" value="Recently Viewed">
+    <input type="hidden" title="movePageDialogHistoryNoResults" value="There were no recently viewed pages found.">
+    <input type="hidden" title="movePageDialogLocationPanel" value="Known Location">
+    <input type="hidden" title="movePageDialogLocationNotFound" value="The specified page was not found.">
+    <input type="hidden" title="movePageDialogBrowsePanel" value="Browse">
+    <input type="hidden" title="movePageDialogPanelLoadErrorMsg" value="Error reading the panel content from the server.">
+    <input type="hidden" title="movePageDialogPanelLoadErrorTip" value="You could try reloading the page and launching the dialog again.">
+    <input type="hidden" title="movePageDialogPanelLoadErrorStatus" value="HTTP Status">
+    <input type="hidden" title="movePageDialogNoSelectionErrorMsg" value="You must make a selection in the tree before you can move the page.">
+    <input type="hidden" title="movePageDialogSearchError" value="Failed to retrieve search results from the server.">
+    <input type="hidden" title="movePageDialogSearchNoResults" value="There were no pages found containing <b>{0}</b>.">
+    <input type="hidden" title="movePageDialogSearchResultCount" value="Showing <b>{0}</b>-<b>{1}</b> of <b>{2}</b> pages containing <b>{3}</b>.">
+    <input type="hidden" title="movePageDialogMoveFailed" value="Move failed. There was a problem contacting the server.">
+    <input type="hidden" title="movePageDialogCannotChangeSpace" value="You cannot move this page to another space because you do not have permission to remove it from this space.">
+    <input type="hidden" title="pageTitle" value="Tutorial - Create subjectAltName SSL Cert for Apache 2.2"/>
+    <input type="hidden" title="parentPageTitle" value="Tutorials"/>
+    <input type="hidden" title="fromPageTitle" value=""/>
+    <input type="hidden" title="spaceKey" value="istas"/>
+    <input type="hidden" title="spaceName" value="IST - Application Services"/>
+    <input type="hidden" title="movePageDialogInvalidLocation" value="You cannot move a page to be underneath itself or its children."/>
+</fieldset>
+
+<script type="text/x-template" title="movePageDialog">
+    <div class="row information">
+        Specify the new parent page for this page and its children by space and title.
+    </div>
+    <div class="form">
+        <div class="row">
+            <label for="new-space">New space:</label>
+            <div class="value new-space-value">
+                <input id="new-space-key" name="new-space-key" type="hidden" value="istas">
+                                    <span class="space-input">
+                        <input id="new-space" name="new-space" value="IST - Application Services" disabled="disabled">
+                    </span>
+                    <span class="description warning">You cannot move this page to another space because you do not have permission to remove it from this space.</span>
+                                <div class="new-space-dropdown aui-dd-parent"></div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="new-parent-page">New parent page:</label>
+            <div class="value new-parent-page-value">
+                <span class="page-input">
+                    <input id="new-parent-page" name="new-parent-page" value="Tutorials">
+                </span>
+                <span class="description">Start typing a page title to see a list of suggestions.</span>
+                <div class="new-parent-page-dropdown aui-dd-parent"></div>
+            </div>
+        </div>
+    </div>
+    <div class="location-info">
+        <div class="row">
+            <label>Current location:</label>
+            <div class="value breadcrumbs-container">
+                <div class="breadcrumbs-line">
+                    <ul id="current-parent-breadcrumbs" class="breadcrumbs">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label>New location:</label>
+            <div class="value breadcrumbs-container">
+                <div class="breadcrumbs-line">
+                    <ul id="new-parent-breadcrumbs" class="breadcrumbs">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/x-template" title="movePageErrors">
+    <div id="move-errors" class="hidden warning"></div>
+</script>
+<script type="text/x-template" title="movePageBreadcrumb">
+    <li><a class="{2}" title="{3}" tabindex="-1"><span>{0}</span></a></li>
+</script>
+<script type="text/x-template" title="movePageBreadcrumbLoading">
+    <li class="loading"><span>Loading breadcrumbs&hellip;</span></li>
+</script>
+<script type="text/x-template" title="movePageBreadcrumbError">
+    <li class="warning last"><span>Error retrieving breadcrumbs.</span></li>
+</script>
+<script type="text/x-template" title="movePageNoMatchingPages">
+    <ol><li><span class="warning">No matching pages found.</span></li></ol>
+</script>
+<script type="text/x-template" title="movePageNoMatchingSpaces">
+    <ol><li><span class="warning">No matching spaces found.</span></li></ol>
+</script>
+
+<script type="text/x-template" title="movePageSearchPanel">
+<div class="row information">
+    Search for and select the new parent page for this page and its children.
+</div>
+<div id="move-page-search-container" class="row">
+    <div class="search-form">
+        <input class="search-query">
+                    <select class="search-space" disabled="disabled">
+                <option value="istas" selected="selected">IST - Application Services</option>
+            </select>
+                <input type="button" value="Search">
+                    <div class="description warning">You cannot move this page to another space because you do not have permission to remove it from this space.</div>
+            </div>
+    <div class="search-results">
+    </div>
+</div>
+</script>
+<script type="text/x-template" title="movePageSearchResult">
+    <tr class="search-result">
+        <th class="search-result-title"><a href="{1}" class="content-type-{2}"><span>{0}</span></a></th>
+        <td class="search-result-space"><a class="space" href="/display/{4}/" title="{3}">{3}</a></td>
+        <td class="search-result-date"><span class="date" title="{6}">{5}</span></td>
+    </tr>
+</script>
+<script type="text/x-template" title="movePageSearchResultsCount">
+    <p class="search-result-count">{0}</p>
+</script>
+<script type="text/x-template" title="movePageSearchResultsTable">
+    <table>
+        <tr class="header">
+            <th class="search-result-title">Page Title</th>
+            <th class="search-result-space">Space</th>
+            <th class="search-result-date">Updated</th>
+        </tr>
+    </table>
+</script>
+<script type="text/x-template" title="movePageSearchResultsLoading">
+    <div class="searching">Searching…</div>
+</script>
+
+<script type="text/x-template" title="movePageHistoryPanel">
+<div class="row information">
+    Select the new parent page for this page and its children from your history.
+</div>
+<div id="move-page-search-container" class="row">
+    <div class="search-results">
+    </div>
+</div>
+</script>
+<script type="text/x-template" title="movePageHistoryLoading">
+    <div class="searching">Loading…</div>
+</script>
+
+
+<script type="text/x-template" title="movePageBrowsePanel">
+    <div class="row information">
+        Click to select the new parent page for this page and its children.
+    </div>
+    <div class="tree"></div>
+</script>
+<script type="text/x-template" title="movePageBrowsePanelLoading">
+    <span>Loading…</span>
+</script>
+<script type="text/x-template" title="movePageBrowsePanelSpace">
+    <ul><li id='tree-root-node-item' class='root-node-list-item'><a class='root-node' href='#'>{0}</a></li></ul>
+</script>
+
+    <!-- Start restrictions section -->
+<fieldset class="hidden parameters i18n">
+        <input type="hidden" id="i18n.page.perms.error.invalid.entity.names" value="Unknown user or group:">
+        <input type="hidden" id="i18n.page.perms.dialog.heading" value="Page Restrictions">
+        <input type="hidden" id="i18n.page.perms.editing.restricted.to" value="Editing restricted to:">
+        <input type="hidden" id="i18n.cancel.name" value="Cancel">
+        <input type="hidden" id="i18n.close.name" value="Close">
+        <input type="hidden" id="i18n.update.name" value="Save">
+</fieldset>
+
+<script type="text/x-template" title="page-permissions-div">
+<div id="page-permissions-div">
+    <div id="page-permissions-editor-form">
+
+                <div id="page-permissions-error-div" class="hidden">
+            <a href="#" id="permissions-error-div-close">Ok</a>
+            <div></div>
+        </div>
+
+                <div id="page-permissions-type-radios" class="page-permissions-label-rows">
+            <div>
+                <input id="restrictViewRadio" type="radio" checked="checked" name="pagePermissionTypeRadio" value="view"/>
+                <label for="restrictViewRadio">Restrict viewing of this page</label>
+                <input id="restrictEditRadio" type="radio" name="pagePermissionTypeRadio" value="edit"/>
+                <label for="restrictEditRadio">Restrict editing of this page</label>
+            </div>
+        </div>
+        <div id="page-permissions-input" class="page-permissions-label-rows">
+            <div class="page-permissions-label">To:</div>
+            <div id="page-permissions-chooser-box">
+                                <span id="page-permissions-choose-user" class="ajs-button">
+                    
+
+
+
+    
+
+
+
+<a href="#" id='userpicker-popup-link-image' onClick="var picker = window.open('/spaces/openuserpicker.action?key=istas&amp;startIndex=0&amp;onPopupSubmit=AJS.PagePermissions.addUserPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=700,height=680,scrollbars=yes'); picker.focus(); return false;"><img src="/s/1722/1/_/images/icons/user_16.gif" height=16 width=16 border=0 align="absmiddle"  title="Choose users" /></a>
+<a href="#" id='userpicker-popup-link-text' onClick="var picker = window.open('/spaces/openuserpicker.action?key=istas&amp;startIndex=0&amp;onPopupSubmit=AJS.PagePermissions.addUserPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=700,height=680,scrollbars=yes'); picker.focus(); return false;">Person...</a>
+
+
+                </span>
+                <span id="page-permissions-choose-group" class="ajs-button">
+                    
+
+
+
+    
+
+ 
+
+<a href="#" id='grouppicker-popup-link-image' onClick="var picker = window.open('/spaces/opengrouppicker.action?key=istas&amp;startIndex=0&amp;actionName=dosearchgroups.action&amp;onPopupSubmit=AJS.PagePermissions.addGroupPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=580,height=550,scrollbars=yes'); picker.focus(); return false;"><img src="/s/1722/1/_/images/icons/group_16.gif" height=16 width=16 border=0 align="absmiddle"  title="Choose groups" /></a>
+<a href="#" id='grouppicker-popup-link-text' onClick="var picker = window.open('/spaces/opengrouppicker.action?key=istas&amp;startIndex=0&amp;actionName=dosearchgroups.action&amp;onPopupSubmit=AJS.PagePermissions.addGroupPermissions', 'EntitiesPicker', 'status=yes,resizable=yes,top=100,left=200,width=580,height=550,scrollbars=yes'); picker.focus(); return false;">Group...</a>
+
+
+                </span>
+            </div>
+            <div id="page-permissions-input-box">
+                                <span>
+                    <input type="text" id="page-permissions-names-input" class="input-placeholder" value="Enter user or group name" name="permissionNames" size="30" autocomplete="off"/>
+                </span>
+                <input
+    type="hidden"
+                            id="page-permissions-names-hidden"           />                <img height="16px" width="1px" src="/s/1722/1/_/images/border/spacer.gif"/>
+                <input type="button" id="add-typed-names" value="Restrict">
+            </div>
+        </div>
+    </div>
+    <div id="page-permissions-tables">
+        <div id="page-permissions-table-div">
+                        <table id="page-permissions-table" class="page-permissions-table">
+                <tr id="page-permissions-no-views" class="marker-row">
+                    <td colspan="3" class="page-permissions-marker-cell"><span>No view restrictions are defined for this page</span></td>
+                </tr>
+                <tr id="page-permissions-no-edits" class="marker-row">
+                    <td colspan="3" class="page-permissions-marker-cell"><span>No edit restrictions are defined for this page</span></td>
+                </tr>
+            </table>
+        </div>
+        <div id="page-inherited-permissions-table-div" class="hidden">
+            <span id="page-inherited-permissions-table-desc">
+                <a class="icon twisty-closed">Show/Hide</a>
+                <a id="toggle-inherited-permissions" title="Click to see inherited restrictions">This page has restricted parent pages. It can only be seen by users who can see those parent pages.</a>
+            </span>
+            <div id="page-inherited-permissions-tables" class="hidden page-inheritance-togglable"></div>
+        </div>
+    </div>
+</div>
+</script>
+
+<script type="text/x-template" title="permissions-row-template">
+    <tr class="permission-row">
+                                
+                <td class="page-permissions-marker-cell" width="20%">
+            <span>Viewing restricted to:</span>
+        </td>
+                <td class="permission-entity" nowrap="true" width="40%">
+            <span class="entity-container">
+                <img class="permission-entity-picture"/>
+                <span class="permission-entity-display-name"></span>
+                <span class="permission-entity-name-wrap">&nbsp;(<span class="permission-entity-name"></span>)</span>
+            </span>
+        </td>
+        <td class="permission-detail-column">
+            <div class="permission-remove-div">
+                <a href="#" class="remove-permission-link">Remove restriction</a>
+            </div>
+        </td>
+    </tr>
+</script>
+<script type="text/x-template" title="permissions-username-no-suggestion-template">
+    <ol>
+        <li><a href="#" class="message"><span>No matches</span></a></li>
+    </ol>
+</script>
+<script type="text/x-template" title="page-inherited-permissions-table-div-template">
+        <div class="page-inherited-permissions-owner-div">
+        <div class="page-inherited-permissions-table-desc">Viewing restrictions apply to “<a></a>”. In order to see “<span></span>”, a user must be in the following list of users and groups:</div>
+        <table class="page-permissions-table"></table>
+    </div>
+</script>
+<!-- End restrictions section -->
+
+
+        
+    
+    
+        <fieldset class="hidden parameters">
+            <input type="hidden" title="parentPageId" value="1409053">
+        </fieldset>
+
+        
+                            
+    
+
+                    
+
+        
+        <div class="page-metadata">
+    <ul>
+                    <li class="page-metadata-item noprint">
+    
+            
+    
+    <a  id="content-metadata-page-restrictions" href="#"  class="page-metadata-icon page-restrictions hidden"   title="Page restrictions apply. Click the lock icon to view or edit the restriction.">
+                   <span>Page restrictions apply</span></a>        </li>
+                <li class="page-metadata-modification-info">
+                    Added by <a class="url fn" href="/display/~61065">Steven Hansen</a>, last edited by <a class="url fn" href="/display/~61065">Steven Hansen</a> on May 10, 2010
+                                        <span class="noprint">&nbsp;(<a id="view-change-link" href="/pages/diffpages.action?pageId=28574612&originalId=29360132">view change</a>)</span>
+                            </li>
+                <li class="show-hide-comment-link">
+            <a id="show-version-comment" class="inline-control-link" href="#">show comment</a>
+            <a id="hide-version-comment" class="inline-control-link" style="display:none;" href="#">hide comment</a>
+        </li>
+            </ul>
+      <div id="version-comment" class="noteMacro" style="display: none;">
+      <strong>Comment:</strong>
+      false<br />
+  </div>
+</div>        
+        <fieldset class="hidden parameters">
+                        <input type="hidden" title="browsePageTreeMode" value="view">
+        </fieldset>
+
+        <div class="wiki-content">
+           <!-- wiki content -->
+            <div>
+<ul>
+    <li><a href='#Tutorial-CreatesubjectAltNameSSLCertforApache2.2-Introduction'>Introduction</a></li>
+    <li><a href='#Tutorial-CreatesubjectAltNameSSLCertforApache2.2-Editopenssl.cnf'>Edit openssl.cnf</a></li>
+    <li><a href='#Tutorial-CreatesubjectAltNameSSLCertforApache2.2-GeneratePrivateKey'>Generate Private Key</a></li>
+<ul>
+    <li><a href='#Tutorial-CreatesubjectAltNameSSLCertforApache2.2-RemovePrivateKeyPassphrase'>Remove Private Key Passphrase</a></li>
+</ul>
+    <li><a href='#Tutorial-CreatesubjectAltNameSSLCertforApache2.2-CreateaCSR%28CertificateSigningRequest%29'>Create a CSR (Certificate Signing Request)</a></li>
+    <li><a href='#Tutorial-CreatesubjectAltNameSSLCertforApache2.2-SigntheCSR'>Sign the CSR</a></li>
+    <li><a href='#Tutorial-CreatesubjectAltNameSSLCertforApache2.2-InstallyourPrivateKeyandCert'>Install your Private Key and Cert</a></li>
+    <li><a href='#Tutorial-CreatesubjectAltNameSSLCertforApache2.2-References'>References</a></li>
+</ul></div>
+
+
+<h2><a name="Tutorial-CreatesubjectAltNameSSLCertforApache2.2-Introduction"></a>Introduction</h2>
+<p>This tutorial will show you have to generate a subjectAltName (SAN) Cert for Apache-2.2.x.  This allows you to host multiple vhosts over SSL using a single IP address.</p>
+
+
+<h2><a name="Tutorial-CreatesubjectAltNameSSLCertforApache2.2-Editopenssl.cnf"></a>Edit openssl.cnf</h2>
+<p><b>/etc/pki/tls/openssl.cnf</b></p>
+
+<p>Locate the following sections and uncomment them.</p>
+
+<p><b>[ CA_default ]</b></p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java"># Extension copying option: use with caution.
+copy_extensions = copy
+</pre>
+</div></div>
+
+<p><b>[ req ]</b></p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">req_extensions = v3_req
+</pre>
+</div></div>
+
+
+<div class='panelMacro'><table class='noteMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></td><td>Notice that we are adding 5 different SANs.  When we generate our CSR, all three names will be part of the CSR.  If you want to add an additional name at a later date, you will need edit this section and generate a new CSR.</td></tr></table></div>
+
+<p>Locate the <b>v3_req</b> section and change it to:</p>
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">[ v3_req ] # Extensions to add to a certificate request
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = wikihub.berkeley.edu
+DNS.2 = code.berkeley.edu
+DNS.3 = beartracks.berkeley.edu
+DNS.4 = ezsvn.berkeley.edu
+DNS.5 = ezsvn-server.berkeley.edu
+</pre>
+</div></div>
+
+
+<h2><a name="Tutorial-CreatesubjectAltNameSSLCertforApache2.2-GeneratePrivateKey"></a>Generate Private Key</h2>
+
+<p>You will need to have the openssl tool installed. If you already have apache installed (hopefully you do) then you should be ok as this tool is bundled with apache. Verify that it is installed with:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">which openssl
+
+=&gt; /usr/bin/openssl
+</pre>
+</div></div>
+
+<p>Create 1024 bit RSA key, encrypted using Triple-DES and stored in a PEM format.</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">sudo openssl genrsa -des3 -out host.key 1024
+
+=&gt; Generating RSA <span class="code-keyword">private</span> key, 1024 bit <span class="code-object">long</span> modulus
+.........................................................++++++
+........++++++
+e is 65537 (0x10001)
+Enter PEM pass phrase:
+Verifying password - Enter PEM pass phrase:
+</pre>
+</div></div>
+
+<h3><a name="Tutorial-CreatesubjectAltNameSSLCertforApache2.2-RemovePrivateKeyPassphrase"></a>Remove Private Key Passphrase</h3>
+<p>One side-effect of the pass-phrased private key is that Apache will ask for the pass-phrase each time the web server is started. This is not what we want. Luckily, mod_ssl includes the ability to use an external program in place of the built-in pass-phrase dialog, however, this is not necessarily the most secure option either. It is possible to remove the Triple-DES encryption from the key, thereby no longer needing to type in a pass-phrase. If the private key is no longer encrypted, it is critical that this file only be readable by the root user! If your system is ever compromised and a third party obtains your unencrypted private key, the corresponding certificate will need to be revoked.</p>
+
+<p>Remove the pass-phrase from the key:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">cp host.key host.key.org
+openssl rsa -in host.key.org -out host.key
+</pre>
+</div></div>
+
+<p>The newly created host.key file has no more passphrase in it.</p>
+
+
+<h2><a name="Tutorial-CreatesubjectAltNameSSLCertforApache2.2-CreateaCSR%28CertificateSigningRequest%29"></a>Create a CSR (Certificate Signing Request)</h2>
+
+<div class='panelMacro'><table class='noteMacro'><colgroup><col width='24'><col></colgroup><tr><td valign='top'><img src="/images/icons/emoticons/warning.gif" width="16" height="16" align="absmiddle" alt="" border="0"></td><td>When you are prompted for a passphrase, simply hit return. Do not enter a passphrase!</td></tr></table></div>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">openssl req -<span class="code-keyword">new</span> -out /tmp/ca.csr -key /etc/pki/tls/<span class="code-keyword">private</span>/ca.key
+
+=&gt; You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a <span class="code-keyword">default</span> value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [GB]:US
+State or Province Name (full name) [Berkshire]:CA
+Locality Name (eg, city) [Newbury]:Berkeley
+Organization Name (eg, company) [My Company Ltd]:UC Berkeley
+Organizational Unit Name (eg, section) []:IST-AS
+Common Name (eg, your name or your server's hostname) []:ezsvn-server.berkeley.edu
+Email Address []:runner AT b dot e
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+</pre>
+</div></div>
+
+<p>Check that your csr is good.  You output should look something like:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">openssl req -text -noout -in ./ca.csr 
+
+=&gt; Certificate Request:
+    Data:
+        Version: 0 (0x0)
+        Subject: C=US, ST=CA, L=Berkeley, O=UC Berkeley, OU=IST-AS, CN=ezsvn-server.berkeley.edu/emailAddress=runner@berkeley.edu
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (1024 bit)
+                Modulus (1024 bit):
+                    00:c3:16:e8:93:bf:ae:5e:a6:27:53:68:4a:d3:ff:
+                    b0:2e:d1:78:34:35:25:53:ee:f2:12:19:1e:f5:99:
+                    69:95:d3:c1:09:61:dd:76:ea:54:45:b9:34:2f:5d:
+                    88:ba:38:e7:3a:c9:38:a2:8d:69:76:30:bc:ea:ec:
+                    72:a0:bd:62:52:22:0d:11:25:42:b7:e9:ad:e9:a4:
+                    95:7f:49:71:a2:8f:b3:25:ee:e7:74:47:e4:c6:f2:
+                    9a:ce:21:11:56:f5:10:d5:24:32:0e:1b:0b:d3:b5:
+                    6c:2a:e7:b9:06:9f:4f:ab:10:a4:61:5a:97:4c:44:
+                    c4:10:8a:b2:98:c4:6a:0b:03
+                Exponent: 65537 (0x10001)
+        Attributes:
+        Requested Extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: 
+                Digital Signature, Non Repudiation, Key Encipherment
+            X509v3 Subject Alternative Name: 
+                DNS:wikihub.berkeley.edu, DNS:code.berkeley.edu, DNS:beartracks.berkeley.edu, DNS:ezsvn.berkeley.edu, DNS:ezsvn-server.berkeley.edu
+    Signature Algorithm: sha1WithRSAEncryption
+        35:12:75:c8:7c:cf:89:70:37:ab:1b:db:a4:e9:70:3e:ba:b3:
+        c9:6f:84:95:b7:77:3c:e0:2d:14:bc:66:68:e4:e4:94:e5:06:
+        f8:78:20:c9:52:87:10:24:04:70:1f:9d:9d:64:60:ff:a3:83:
+        1d:e4:aa:d2:82:ea:d4:41:b5:2c:5b:93:cd:9a:e9:fb:4d:bc:
+        9a:96:22:59:4b:ef:2c:00:8c:3b:87:93:3e:1e:01:57:4a:c9:
+        4f:ac:c2:41:82:ac:6a:2b:c4:f7:14:a1:4a:1a:94:76:be:62:
+        e5:ff:b3:9d:35:f0:af:2f:83:2e:84:c5:e2:c3:15:56:ce:62:
+        c3:3e
+</pre>
+</div></div>
+
+<h2><a name="Tutorial-CreatesubjectAltNameSSLCertforApache2.2-SigntheCSR"></a>Sign the CSR</h2>
+<p>At this point you will need to generate a self-signed certificate because you either don't plan on having your certificate signed by a CA, or you wish to test your new SSL implementation while the CA is signing your certificate. This temporary certificate will generate an error in the client browser to the effect that the signing certificate authority is unknown and not trusted.</p>
+
+<p>Generate a temporary certificate which is good for 365 days:</p>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java">openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt -extfile openssl.cnf -extensions v3_req
+
+=&gt; Signature ok
+subject=/C=CH/ST=Bern/L=Oberdiessbach/O=Akadia AG/OU=Information
+Technology/CN=<span class="code-keyword">public</span>.akadia.com/Email=martin dot zahn at akadia dot ch
+Getting Private key
+</pre>
+</div></div>
+
+
+<h2><a name="Tutorial-CreatesubjectAltNameSSLCertforApache2.2-InstallyourPrivateKeyandCert"></a>Install your Private Key and Cert</h2>
+
+<div class="code panel" style="border-width: 1px;"><div class="codeContent panelContent">
+<pre class="code-java"># Move the files to the correct locations
+mv ezsvn.crt /etc/pki/tls/certs
+mv ezsvn.key /etc/pki/tls/<span class="code-keyword">private</span>/ezsv.key
+mv ezsvn.csr /etc/pki/tls/<span class="code-keyword">private</span>/ezsvn.csr
+</pre>
+</div></div>
+
+
+<h2><a name="Tutorial-CreatesubjectAltNameSSLCertforApache2.2-References"></a>References</h2>
+<ul>
+	<li><a href="http://lanestechblog.blogspot.com/2009/04/creating-ssl-certificates-with-multiple.html" class="external-link" rel="nofollow">http://lanestechblog.blogspot.com/2009/04/creating-ssl-certificates-with-multiple.html</a></li>
+	<li><a href="http://www.flatmtn.com/article/setting-ssl-certificates-apache" class="external-link" rel="nofollow">http://www.flatmtn.com/article/setting-ssl-certificates-apache</a></li>
+</ul>
+        </div>
+
+
+            
+
+
+<fieldset class="hidden parameters">
+    <legend>Labels parameters</legend>
+    <input type="hidden" id="editLabel" value="Edit">
+    <input type="hidden" id="addLabel" value="Add Labels">
+    <input type="hidden" id="domainName" value="http://wikihub.berkeley.edu">
+    <input type="hidden" id="pageId" value="28574612">
+    <input type="hidden" id="spaceKey" value="istas">
+</fieldset>
+
+<div id="labels-section" class="pageSection">
+    <div id="default-labels-header" class="section-header">
+        <h2 id="labels-section-title" class="section-title  hidden ">Labels</h2>
+            </div>
+
+    <div class="labels-editor">
+        <div id="labelsList">
+                    </div>
+
+        <span class="errorMessage error" id="errorSpan"></span>
+        <form method="GET" action="" id="add-labels-form">
+            <div id="labelInputSpan" class="labels-input">
+                <div id="labelOperationErrorContainer" class="hidden">
+                    <span class="error"><span class="errorMessage" id="labelOperationErrorMessage"></span></span>
+                </div>
+
+                <div class="caption">Enter labels to add to this page:</div>
+                <div id="label-input-fields">
+                    <input autocomplete="off" id="labelsString" name="labelsString" value="" size="40">
+                    <input id="add-labels-editor-button" type="submit" class="add-labels" value="Add">
+                    <input id="close-labels-editor-button" type="submit" class="hide-labels-editor" value="Done">
+                </div>
+                <div id="waitImageAndStatus">
+                    <img class="waiting" alt="Please wait" src="/s/1722/1/_/images/icons/wait.gif">&nbsp;
+                    <span id="labelOperationStatus" class="smalltext"></span>
+                </div>
+                <div id="labelsAutocompleteList" class="aui-dd-parent"></div>
+                <div class="labels-tip">
+                    <div id="suggestedLabelsSpan"></div>
+                    Looking for a label? Just start typing.
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+            
+            
+
+
+
+
+            
+    
+    
+
+
+<fieldset class="parameters hidden">
+    <input type="hidden" id="deleteCommentConfirmMessage" value="Are you sure you want to remove the comment?">
+    <input type="hidden" id="collapseTooltip" value="Click to toggle the display of this comment.">
+</fieldset>
+
+
+
+
+
+
+<div id="comments-section" class="pageSection">
+    
+    
+    
+    
+                                    <p class="noprint">
+                <a href="/display/istas/Tutorial+-+Create+subjectAltName+SSL+Cert+for+Apache+2.2?showComments=true&amp;showCommentArea=true#addcomment" id="add-comment-bottom" accesskey="m">Add Comment</a>
+            </p>
+                        </div>
+
+
+            
+</div>
+    <br class="clear">
+</div>
+  
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+{release, {"Erlios Backup","eb_pers-2.5.2"}, {erts, "5.6.5"},
+ [{kernel,"2.12.5"},
+  {stdlib,"1.15.5"},
+  {sasl, "2.1.5.4"},
+	{crypto, "1.5.3", none},
+	{ssl, "3.10", none},
+	{inets, "5.0.12", none},
+	{eklib, "1.0.1", none},
+	{kdb, "1.0.1", none},
+	{eb_pers, "2.5.2", none}
+]}.

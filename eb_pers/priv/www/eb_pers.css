@@ -1,0 +1,236 @@
+/*******************************************************************
+ Copyright 2009 - 2010 by Evgeny Khirin.
+********************************************************************/
+
+* {
+    padding : 0px;
+    margin : 0px;
+  }
+
+
+body {
+    background : #e5e5e5;
+    font : 0.9em sans-serif;
+  }
+
+
+a {
+    font-weight : bold;
+    color : #477aa8;
+    text-decoration : none;
+  }
+
+
+a:hover {
+    text-decoration : underline;
+  }
+
+
+p, form {
+    padding : 0 0 0.5em;
+  }
+
+
+.important {
+    color:#f02025;
+    font-weight: bold;
+  }
+
+
+.line_through {
+		text-decoration: line-through;
+}
+
+
+.big {
+    font-size: 1.4em;
+  }
+
+
+.small {
+    font-size: 0.8em;
+  }
+
+
+.box {
+		margin:0 0 20px 0;
+		padding:10px;
+		border:1px solid #c0c0c0;
+    background-color: #fafbfc;
+		line-height:1.5em;
+}
+
+input.license {
+    width : 220px;
+  }
+
+
+input.email {
+    width : 320px;
+  }
+
+
+th {
+    text-align : left;
+    padding : 0 10px 0 0;
+  }
+
+
+td img {
+    margin : 0 0 0 15px;
+    padding : 0 10px 0 0;
+  }
+
+
+td {
+    padding : 0 10px 0 0;
+  }
+
+
+#container {
+    background : #ffffff;
+    padding : 1px;
+    margin : 20px auto;
+    border : #b7b7b7 solid 2px;
+    width : 955px;
+  }
+
+
+#header {
+    background : #477aa8;
+    color : #ffffff;
+    height : 110px;
+    width : 955px;
+  }
+
+
+#header a {
+    color : #ffffff;
+    font-weight : normal;
+  }
+
+
+#header h1 {
+    padding : 20px 0 0 60px;
+    font-size : 2.2em;
+  }
+
+
+#header h2 {
+    padding : 5px 0 0 60px;
+    font-weight : normal;
+    font-size: 1.2em;
+  }
+
+
+#navigation {
+    background : #477aa8;
+    line-height : 2.0em;
+    margin : 1px 0 0;
+    color : #ffffff;
+    height : 2.0em;
+    width : 955px;
+    font-size: 0.9em;
+  }
+
+
+#navigation li {
+    list-style : none none;
+    border-style : none solid none none;
+    border-width : medium 1px medium medium;
+    border-right-color : #ffffff;
+    float : left;
+  }
+
+
+#navigation a {
+    color : #ffffff;
+    display : block;
+    padding : 0 10px;
+  }
+
+
+#navigation .selected, #navigation a:hover {
+    background : #81b0db;
+    color : #ffffff;
+    text-decoration : none;
+  }
+
+
+#content {
+    margin : 10px 10px 10px 10px;
+    float : left;
+    width : 650px;
+    font-size: 0.9em;
+    line-height:1.6em;
+  }
+
+
+#content fieldset {
+    margin:0 0 10px 0;
+    padding:10px;
+    border:1px solid #c0c0c0;
+    background-color: #fafbfc;
+  }
+
+
+#content legend {
+    font-weight: bold;
+    color:#505050;
+    white-space: normal;
+  }
+
+
+#content h2 {
+    font-weight: normal;
+    padding : 0 0 0.5em;
+    color : #505050;
+  }
+
+
+#content select.path {
+    height : 110px;
+  }
+
+
+#content .command, .path {
+    width : 625px;
+  }
+
+
+#content .search {
+    width : 560px;
+  }
+
+#content input, select {
+    font-size: 1em;
+  }
+
+#subcontent {
+    margin : 10px 10px 10px 10px;
+    float : right;
+    width : 255px;
+    font-size: 0.9em;
+  }
+
+
+#subcontent input {
+    font-size: 1em;
+  }
+
+
+#footer {
+    background : #477aa8;
+    font : 0.7em serif;
+    padding : 5px 0 0;
+    clear : both;
+    color : #ffffff;
+    text-align : center;
+    width : 955px;
+  }
+
+
+#footer a {
+    color : #ffffff;
+  }
+

@@ -1,0 +1,14 @@
+Throughput results:
+17.2 GB of compresible and deduplicatable data:
+deduplication ratio - 87%.
+compression ratio - 80%.
+Resulting size - 12 GB.
+First version throughput - 12 MB/sec.
+Second version throughput - 19.5 MB/sec.
+Throughput of "cp" command - 38.88 MB/sec.
+
+4.3 GB of non compresible and non deduplicatable data:
+Resulting size - 4.3 GB.
+First version throughput - 21.5 MB/sec.
+Second version throughput - 27.7 MB/sec.
+Throughput of "cp" command - 41.42 MB/sec.
