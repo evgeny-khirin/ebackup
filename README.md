@@ -1,6 +1,6 @@
 # Backup System written in Erlang
 
-Supports versioning backup with deduplication data.
+Supports versioning backup with data deduplication.
 
 Contains 64-bits storage engine for Erlang with full ACID supprt.
 
