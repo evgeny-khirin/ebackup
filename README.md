@@ -1,9 +1,21 @@
 # Backup System written in Erlang
 
-Same as ebackup, but with license manager stripped.
-
-Used in my home since 2010 and never lost data.
-
-Supports deduplication of backed up data.
+Supports versioning backup with deduplication data.
 
 Contains 64-bits storage engine for Erlang with full ACID supprt.
+
+# Building
+
+* OS supported: Linux 32 and 64 bits.
+
+* Since it does not have make file, you'll need Erlang to build the compiler. There is
+  build.erl file in root directory. It is my replacement of make, written in Erlang.
+  You need to start Erlang in the root directory:
+  
+      evgeny@wheezy:~/work/ebackup$ erl
+      Erlang/OTP 17 [erts-6.2] [source] [async-threads:10] [kernel-poll:false]
+
+      Eshell V6.2  (abort with ^G)
+      1> c("build.erl").
+      {ok,build}
+      2> build:compile().
