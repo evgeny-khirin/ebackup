@@ -1,4 +1,4 @@
-# Backup System written in Erlang
+# Backup System Written in Erlang
 
 Supports versioning backup with data deduplication.
 
