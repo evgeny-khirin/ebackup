@@ -926,7 +926,7 @@ about(_Env, _Input) ->
 										 "Erlios")]),
 						h:p(["Technical support: ",
 								 h:a([{href, "mailto:support@erlios.com"}],
-										 support@erlios.com)])],
+										 "support@erlios.com")])],
 		page('About', Text).
 
 %%====================================================================

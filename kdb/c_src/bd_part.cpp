@@ -7,6 +7,8 @@
 /// Description : Intermediate block device - presents partition on top of
 /// underlaying device.
 ///-------------------------------------------------------------------
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
 #include <stdio.h>
 #include <assert.h>
 
@@ -75,7 +77,7 @@ void bd_part::start(const std::string & name, const std::string & block_device,
 	printf("bd_part: name %s, block_device %s, start %I64u, capacity %I64u, ",
 				 name.c_str(), block_device.c_str(), start, capacity);
 #else
-	printf("bd_part: name %s, block_device %s, start %llu, capacity %llu, ",
+	printf("bd_part: name %s, block_device %s, start %" PRIu64 ", capacity %" PRIu64,
 				 name.c_str(), block_device.c_str(), start, capacity);
 #endif
 	opt_map	opts;
@@ -144,4 +146,3 @@ block_ptr bd_part::read(uint64_t n) {
 uint64_t bd_part::capacity() {
 	return m_capacity;
 }
-

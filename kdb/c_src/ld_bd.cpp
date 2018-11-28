@@ -181,7 +181,7 @@ void ld_bd::start(const opt_map & options) {
 		throw not_registered();
 	}
 	m_block_size = m_pdevice->block_size();
-	if (m_block_size < std::max((uint32_t)17, sizeof(header_t))) {
+	if (m_block_size < std::max((uint32_t)17, (uint32_t)sizeof(header_t))) {
 		throw block_too_small();
 	}
 	m_block_size -= 16;
@@ -398,5 +398,3 @@ void ld_bd::stats(no_stats_list & list) {
 block_ptr ld_bd::alloc() {
 	return m_pdevice->alloc();
 }
-
-

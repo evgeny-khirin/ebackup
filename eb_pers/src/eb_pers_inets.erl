@@ -14,7 +14,7 @@
 -behaviour(gen_server).
 
 -include_lib("kernel/include/inet.hrl").
--include_lib("inets/src/httpd.hrl").
+-include_lib("inets/src/http_server/httpd.hrl").
 %% undefine macro defined in httpd.hrl
 -undef(ERROR).
 
@@ -331,4 +331,3 @@ make_url_file({win32, _}) ->
 		end;
 make_url_file(_) ->
 		ok.
-
